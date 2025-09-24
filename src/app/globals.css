@@ -1,26 +1,38 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Smooth anchor scrolling (accessible) */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Base colors */
+:root {
+  --wc-bg:   #0b0f0a;
+  --wc-text: #e7f0e4;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wc-bg:   #0b0f0a;
+    --wc-text: #e7f0e4;
+  }
+}
+
+/* Page surface */
+html, body { height: 100%; }
+body { background: var(--wc-bg); color: var(--wc-text); }
+
+/* Optional helper for cards */
+.surface { @apply rounded-2xl border border-white/10 bg-wc_bg2/70 shadow-card; }
+
+/* Balance long headings on wide screens */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
 }
