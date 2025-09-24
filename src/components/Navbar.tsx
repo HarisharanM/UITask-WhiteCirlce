@@ -2,16 +2,17 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react"
-import { getSession, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
 
 export default function Navbar() {
-  const [authed, setAuthed] = useState(false)
+  // The useSession hook provides session data and the current status
+  const { data: session, status } = useSession()
+  const isAuthenticated = status === "authenticated"
 
-  useEffect(() => {
-    // Check session on mount to toggle buttons
-    getSession().then((s) => setAuthed(Boolean(s?.user)))
-  }, [])
+  // While the session is being checked, we can show a placeholder to prevent UI flicker
+  if (status === "loading") {
+    return <header className="sticky top-0 z-50 h-[65px] border-b border-white/5 bg-wc_bg/80 backdrop-blur" />
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-wc_bg/80 backdrop-blur">
@@ -26,13 +27,10 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-6 text-sm md:flex">
             <Link href="/#process" className="hover:text-wc_lime">Process</Link>
-            <Link href="/#benefits" className="hover:text-wc_lime">Benefits</Link>
-            <Link href="/#portfolio" className="hover:text-wc_lime">Portfolio</Link>
             <Link href="/#pricing" className="hover:text-wc_lime">Pricing</Link>
-            <Link href="/#case-study" className="hover:text-wc_lime">Case Study</Link>
-
-            {/* Auth section */}
-            {!authed ? (
+            
+            {/* This is the section that will now update correctly */}
+            {!isAuthenticated ? (
               <>
                 <Link href="/auth/login" className="rounded-md border border-white/10 px-3 py-2 hover:bg-white/5">
                   Log in
@@ -60,4 +58,3 @@ export default function Navbar() {
     </header>
   )
 }
-
