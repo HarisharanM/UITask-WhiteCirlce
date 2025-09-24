@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-// Correctly import from the 'geist' package
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer"; // <-- Import the Footer
 
 export const metadata: Metadata = {
   title: "Whitecircle — Content that grows brands",
@@ -25,8 +24,8 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
-          {children}
-          <Footer />
+          <main className="flex-1">{children}</main>
+          <Footer /> {/* <-- Add the Footer here */}
         </Providers>
       </body>
     </html>
