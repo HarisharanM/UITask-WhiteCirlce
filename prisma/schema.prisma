@@ -20,3 +20,11 @@ model User {
   updatedAt    DateTime @updatedAt
 }
 
+model CallBooking {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  description String
+  createdAt   DateTime @default(now())
+}

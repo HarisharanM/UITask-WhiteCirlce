@@ -5,7 +5,7 @@ import "./globals.css";
 
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer"; // <-- Import the Footer
+import Footer from "@/components/Footer"; 
 
 export const metadata: Metadata = {
   title: "Whitecircle — Content that grows brands",

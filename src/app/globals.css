@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth anchor scrolling (accessible) */
+
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -25,14 +25,38 @@ html { scroll-behavior: smooth; }
   }
 }
 
-/* Page surface */
 html, body { height: 100%; }
 body { background: var(--wc-bg); color: var(--wc-text); }
 
-/* Optional helper for cards */
 .surface { @apply rounded-2xl border border-white/10 bg-wc_bg2/70 shadow-card; }
 
-/* Balance long headings on wide screens */
 @layer utilities {
   .text-balance { text-wrap: balance; }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+ 
+  .btn-press {
+    @apply transition-transform active:scale-95;
+  }
+
+  .btn-shine {
+    @apply relative overflow-hidden;
+  }
+
+  .btn-shine::after {
+    content: "";
+    @apply absolute top-0 -left-full h-full w-full -translate-x-full -skew-x-12 transform bg-gradient-to-r from-transparent via-white/30 to-transparent;
+    animation: shine 2.5s infinite;
+  }
+
+  @keyframes shine {
+    100% {
+      @apply left-full;
+    }
+  }
 }
